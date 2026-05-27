@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { WHATSAPP_SUPPORT } from "@/lib/constants";
 import { toast } from "sonner";
 
 export default function LoginForm({ redirectTo }: { redirectTo?: string }) {
@@ -122,7 +123,7 @@ export default function LoginForm({ redirectTo }: { redirectTo?: string }) {
             </svg>
             <div>
               <strong>لا يوجد تسجيل ذاتي —</strong> الحسابات تُنشأ يدوياً من الأدمن بعد التحويل البنكي.{" "}
-              <a href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_SUPPORT ?? "966500000000"}`} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>
+              <a href={`https://wa.me/${WHATSAPP_SUPPORT.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>
                 اطلب حسابك عبر واتساب
               </a>
             </div>
@@ -145,34 +146,14 @@ export default function LoginForm({ redirectTo }: { redirectTo?: string }) {
         <div style={{ position: "absolute", top: -100, insetInlineEnd: -100, width: 400, height: 400, borderRadius: "50%", background: "rgba(176,138,62,.18)", filter: "blur(60px)", pointerEvents: "none" }} />
 
         <div style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 10px", background: "rgba(176,138,62,.25)", borderRadius: "var(--r-pill)", fontSize: 12, color: "var(--accent)", fontWeight: 500 }}>
-            منذ 2025
-          </div>
-        </div>
-
-        <div style={{ position: "relative", zIndex: 1 }}>
           <h2 style={{ margin: 0, fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 600, lineHeight: 1.15, letterSpacing: "-0.02em", color: "#fff" }}>
             مكتبك يستحق
             <br />
             <span style={{ color: "var(--accent)" }}>وجوداً يليق به.</span>
           </h2>
           <p style={{ marginTop: 18, maxWidth: 380, color: "rgba(255,255,255,.7)", fontSize: 15, lineHeight: 1.7 }}>
-            انضم لأكثر من 12 مكتباً مهنياً سعودياً اختاروا وجود لإطلاق وجودهم الرقمي بصورة احترافية.
+            منصة سعودية متكاملة لإطلاق موقعك الاحترافي. بدون أكواد، بدون مصممين.
           </p>
-        </div>
-
-        <div style={{ position: "relative", zIndex: 1, display: "flex", gap: 32 }}>
-          {[
-            { v: "12+", l: "مكتب نشط" },
-            { v: "220+", l: "مشروع منشور" },
-            { v: "99.9%", l: "وقت تشغيل" },
-          ].map((s) => (
-            <div key={s.l}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 24, color: "var(--accent)", fontWeight: 600 }}>{s.v}</div>
-              <div style={{ fontSize: 12, color: "rgba(255,255,255,.55)", marginTop: 2 }}>{s.l}</div>
-            </div>
-          ))}
-        </div>
       </div>
 
       <style>{`

@@ -8,27 +8,13 @@ import type { Tenant, CustomTheme } from "@/lib/types";
 import { updateTenantTemplate } from "@/app/actions/tenant";
 import { PLANS } from "@/lib/constants";
 
-const TEMPLATE_COLORS: Record<string, string[]> = {
-  modern:   ["#ffffff", "#0e3b2e", "#b08a3e"],
-  classic:  ["#f6efe3", "#5a3e2b", "#c69749"],
-  heritage: ["#f2ece0", "#7a5c3c", "#b08a3e"],
-  minimal:  ["#fafafa", "#1a1a1a", "#888"],
-  luxury:   ["#0a0a0a", "#d4a85a", "#f4ecd8"],
-  studio:   ["#f0ebe3", "#3a4a1e", "#9c7a1f"],
-};
-
-const TEMPLATE_NAMES: Record<string, string> = {
-  modern: "عصري", classic: "كلاسيكي", heritage: "تراثي",
-  minimal: "بسيط", luxury: "فاخر", studio: "ستوديو",
-};
-
 export default function ThemeClient({
   tenant,
   templates,
   customThemes,
 }: {
   tenant: Tenant;
-  templates: { id: string; nameAr: string; plan: string }[];
+  templates: { id: string; nameAr: string; plan: string; colors: string[] }[];
   customThemes: CustomTheme[];
 }) {
   const router = useRouter();
@@ -57,7 +43,7 @@ export default function ThemeClient({
         <div>
           <h1 style={{ margin: 0, fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 600 }}>القالب</h1>
           <p style={{ margin: "4px 0 0", fontSize: 14, color: "var(--muted)" }}>
-            القالب الحالي: <strong>{TEMPLATE_NAMES[tenant.current_template] ?? tenant.current_template}</strong>
+            القالب الحالي: <strong>{templates.find((t) => t.id === tenant.current_template)?.nameAr ?? tenant.current_template}</strong>
           </p>
         </div>
         {selected !== tenant.current_template && (
@@ -72,7 +58,7 @@ export default function ThemeClient({
         {templates.map((t) => {
           const allowed = canUseTemplate(t.plan);
           const isSelected = selected === t.id;
-          const colors = TEMPLATE_COLORS[t.id] ?? ["#fff", "#111", "#999"];
+          const colors = t.colors ?? ["#fff", "#111", "#999"];
 
           return (
             <div

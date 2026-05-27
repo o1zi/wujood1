@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SECTORS, PLANS, WHATSAPP_SUPPORT } from "@/lib/constants";
+import { SECTORS, PLANS, TEMPLATES, WHATSAPP_SUPPORT } from "@/lib/constants";
 
 export default function LandingPage() {
   const waLink = `https://wa.me/${WHATSAPP_SUPPORT.replace(/\D/g, "")}`;
@@ -97,10 +97,10 @@ export default function LandingPage() {
 
             <div style={{ marginTop: 36, display: "flex", gap: 32, flexWrap: "wrap" }}>
               {[
-                { v: "5+", l: "قوالب جاهزة" },
+                { v: "6", l: "قوالب احترافية" },
                 { v: "RTL", l: "دعم عربي كامل" },
-                { v: "24h", l: "تفعيل خلال يوم" },
-                { v: "99.9%", l: "وقت تشغيل" },
+                { v: "يوم", l: "تفعيل سريع" },
+                { v: "99.9%", l: "استقرار عالي" },
               ].map((s) => (
                 <div key={s.l}>
                   <div style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "var(--primary)", fontWeight: 600 }}>{s.v}</div>
@@ -116,16 +116,16 @@ export default function LandingPage() {
             overflow: "hidden",
           }}>
             <div style={{ background: "var(--primary)", padding: "24px 28px 20px" }}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "#fff", fontWeight: 600 }}>مكتب الفارابي</div>
-              <div style={{ color: "rgba(255,255,255,.6)", fontSize: 13, marginTop: 4 }}>للاستشارات الهندسية</div>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "#fff", fontWeight: 600 }}>موقعك الاحترافي</div>
+              <div style={{ color: "rgba(255,255,255,.6)", fontSize: 13, marginTop: 4 }}>بأقل من 24 ساعة</div>
             </div>
             <div style={{ padding: "20px 28px" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 {[
-                  { v: "220+", l: "مشروع" },
-                  { v: "14", l: "سنة خبرة" },
-                  { v: "96%", l: "رضا العملاء" },
-                  { v: "5★", l: "التقييم" },
+                  { v: "جاهز", l: "خلال يوم" },
+                  { v: "RTL", l: "دعم كامل" },
+                  { v: "SEO", l: "مُحسَّن" },
+                  { v: "آمن", l: "تشفير كامل" },
                 ].map((s) => (
                   <div key={s.l} style={{ background: "var(--bg-alt)", borderRadius: "var(--r-md)", padding: "12px 14px" }}>
                     <div style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "var(--primary)", fontWeight: 600 }}>{s.v}</div>
@@ -159,7 +159,7 @@ export default function LandingPage() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
             {[
-              { icon: "🎨", t: "قوالب احترافية", d: "5 قوالب جاهزة + قوالب مخصصة. كل قالب يحترم هوية القطاع ويدعم التخصيص الكامل." },
+              { icon: "🎨", t: "قوالب احترافية", d: `${TEMPLATES.length} قوالب جاهزة + تخصيص كامل. كل قالب يحترم هوية القطاع ويدعم التحكم بالألوان والخطوط.` },
               { icon: "🌐", t: "دومين خاص", d: "subdomain.wujood.sa مجاناً، أو دومين مستقل في باقة Premium." },
               { icon: "📁", t: "إدارة محتوى ذكية", d: "ارفع المشاريع والصور، رتّب بالسحب والإفلات، وانشر بضغطة. لا أكواد ولا تعقيد." },
               { icon: "🔒", t: "أمان متعدد المستويات", d: "كل بيانات مكتبك معزولة تماماً عن باقي المكاتب. لا أحد يصلها غيرك." },
@@ -184,26 +184,20 @@ export default function LandingPage() {
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{ marginBottom: 36 }}>
             <span style={{ fontSize: 12, color: "var(--accent)", fontFamily: "var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase" }}>القوالب</span>
-            <h2 style={{ margin: "12px 0 6px", fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 600, letterSpacing: "-0.02em" }}>5 قوالب أساسية، آلاف الاحتمالات</h2>
+            <h2 style={{ margin: "12px 0 6px", fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 600, letterSpacing: "-0.02em" }}>{TEMPLATES.length} قوالب أساسية، آلاف الاحتمالات</h2>
             <p style={{ margin: 0, color: "var(--muted)" }}>كل قالب قابل للتخصيص الكامل — ألوان، خطوط، تخطيطات.</p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14 }}>
-            {[
-              { name: "Modern", nameAr: "عصري", colors: ["#ffffff", "#0e3b2e", "#b08a3e"] },
-              { name: "Classic", nameAr: "كلاسيكي", colors: ["#f6efe3", "#5a3e2b", "#c69749"] },
-              { name: "Heritage", nameAr: "تراثي", colors: ["#f2ece0", "#7a5c3c", "#b08a3e"] },
-              { name: "Minimal", nameAr: "بسيط", colors: ["#fafafa", "#1a1a1a", "#888"] },
-              { name: "Luxury", nameAr: "فاخر", colors: ["#0a0a0a", "#d4a85a", "#f4ecd8"] },
-            ].map((t) => (
-              <div key={t.name} style={{ borderRadius: "var(--r-lg)", overflow: "hidden", border: "1px solid var(--border)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: `repeat(${TEMPLATES.length}, 1fr)`, gap: 14 }}>
+            {TEMPLATES.map((t) => (
+              <div key={t.id} style={{ borderRadius: "var(--r-lg)", overflow: "hidden", border: "1px solid var(--border)" }}>
                 <div style={{ height: 90, display: "flex" }}>
-                  {t.colors.map((c, i) => (
-                    <div key={i} style={{ flex: 1, background: c }} />
-                  ))}
+                  <div style={{ flex: 1, background: "var(--primary)" }} />
+                  <div style={{ flex: 1, background: "var(--accent)" }} />
+                  <div style={{ flex: 1, background: "var(--surface)" }} />
                 </div>
                 <div style={{ padding: "10px 12px", background: "var(--bg)" }}>
                   <div style={{ fontSize: 13, fontWeight: 600, color: "var(--ink)" }}>{t.nameAr}</div>
-                  <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 2 }}>{t.name}</div>
+                  <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 2 }}>{t.nameEn}</div>
                 </div>
               </div>
             ))}

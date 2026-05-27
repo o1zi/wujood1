@@ -42,12 +42,12 @@ export const PLANS: Record<Plan, PlanConfig & { label: string; labelAr: string }
 };
 
 export const TEMPLATES = [
-  { id: "modern",   nameAr: "عصري",   nameEn: "Modern",   plan: "basic" as Plan },
-  { id: "classic",  nameAr: "كلاسيكي", nameEn: "Classic", plan: "pro" as Plan },
-  { id: "heritage", nameAr: "تراثي",  nameEn: "Heritage", plan: "pro" as Plan },
-  { id: "minimal",  nameAr: "بسيط",   nameEn: "Minimal",  plan: "pro" as Plan },
-  { id: "luxury",   nameAr: "فاخر",   nameEn: "Luxury",   plan: "pro" as Plan },
-  { id: "studio",   nameAr: "ستوديو", nameEn: "Studio",   plan: "pro" as Plan },
+  { id: "modern",   nameAr: "عصري",   nameEn: "Modern",   plan: "basic" as Plan, colors: ["#ffffff", "#0e3b2e", "#b08a3e"] },
+  { id: "classic",  nameAr: "كلاسيكي", nameEn: "Classic", plan: "pro" as Plan,   colors: ["#f6efe3", "#5a3e2b", "#c69749"] },
+  { id: "heritage", nameAr: "تراثي",  nameEn: "Heritage", plan: "pro" as Plan,   colors: ["#f2ece0", "#7a5c3c", "#b08a3e"] },
+  { id: "minimal",  nameAr: "بسيط",   nameEn: "Minimal",  plan: "pro" as Plan,   colors: ["#fafafa", "#1a1a1a", "#888"] },
+  { id: "luxury",   nameAr: "فاخر",   nameEn: "Luxury",   plan: "pro" as Plan,   colors: ["#0a0a0a", "#d4a85a", "#f4ecd8"] },
+  { id: "studio",   nameAr: "ستوديو", nameEn: "Studio",   plan: "pro" as Plan,   colors: ["#f0ebe3", "#3a4a1e", "#9c7a1f"] },
 ];
 
 export const UPLOAD_LIMITS = {
