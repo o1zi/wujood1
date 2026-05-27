@@ -154,6 +154,7 @@ export default function LoginForm({ redirectTo }: { redirectTo?: string }) {
           <p style={{ marginTop: 18, maxWidth: 380, color: "rgba(255,255,255,.7)", fontSize: 15, lineHeight: 1.7 }}>
             منصة سعودية متكاملة لإطلاق موقعك الاحترافي. بدون أكواد، بدون مصممين.
           </p>
+          </div>
       </div>
 
       <style>{`
