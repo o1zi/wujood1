@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PLANS, SECTORS } from "@/lib/constants";
 import { fmtDate, daysUntil } from "@/lib/utils";
 import type { Tenant, Plan } from "@/lib/types";
-import { PlanBadge, StatusBadge } from "../page";
+import { PlanBadge, StatusBadge } from "../components";
 
 export const metadata = { title: "المكاتب — أدمن وجود" };
 

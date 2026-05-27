@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { PLANS, SECTORS, ROOT_DOMAIN } from "@/lib/constants";
 import { fmtDate, daysUntil } from "@/lib/utils";
 import type { Tenant, SubscriptionLog, Plan } from "@/lib/types";
-import { PlanBadge, StatusBadge } from "../../page";
+import { PlanBadge, StatusBadge } from "../../components";
 
 export default function TenantAdminClient({
   tenant: initial,
