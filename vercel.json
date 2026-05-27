@@ -1,4 +1,5 @@
 {
+  "framework": "nextjs",
   "buildCommand": "cd wujood-app && npm install && npm run build",
   "outputDirectory": "wujood-app/.next",
   "installCommand": "cd wujood-app && npm install"

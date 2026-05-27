@@ -20,7 +20,8 @@ export async function middleware(request: NextRequest) {
     host === ROOT_DOMAIN ||
     host === `www.${ROOT_DOMAIN}` ||
     host === "localhost" ||
-    host === "127.0.0.1";
+    host === "127.0.0.1" ||
+    host.endsWith(".vercel.app");   // Vercel preview / staging deployments
 
   // ── Admin protection ─────────────────────────────────────────
   if (isRootDomain && url.pathname.startsWith("/admin")) {
