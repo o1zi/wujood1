@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { Tenant, CustomTheme } from "@/lib/types";
 import { updateTenantTemplate } from "@/app/actions/tenant";
-import { PLANS } from "@/lib/constants";
 
 export default function ThemeClient({
   tenant,

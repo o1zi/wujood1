@@ -15,7 +15,7 @@ export default function ModernTemplate({ tenant: t, projects, services, features
     return () => window.removeEventListener("scroll", h);
   }, []);
 
-  const cats = ["all", ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))];
+  const cats = ["all", ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean))) as string[]];
   const filtered = filter === "all" ? projects : projects.filter((p) => p.category === filter);
   const wa = (t.whatsapp ?? "").replace(/\D/g, "");
   const initial = t.name_ar?.[0] ?? "م";

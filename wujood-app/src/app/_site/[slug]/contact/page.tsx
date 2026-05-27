@@ -1,18 +1,21 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import type { Tenant } from "@/lib/types";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const supabase = await createClient();
   const { data: t } = await supabase.from("tenants").select("*").eq("slug", params.slug).eq("is_active", true).single();
-  return { title: t ? `تواصل مع ${t.name_ar}` : "تواصل معنا" };
+  const tenant = t as Tenant | null;
+  return { title: tenant ? `تواصل مع ${tenant.name_ar}` : "تواصل معنا" };
 }
 
 export default async function ContactPage({ params }: { params: { slug: string } }) {
   const supabase = await createClient();
 
-  const { data: tenant } = await supabase
+  const { data: raw } = await supabase
     .from("tenants").select("*").eq("slug", params.slug).eq("is_active", true).single();
+  const tenant = raw as Tenant | null;
   if (!tenant) notFound();
 
   const wa = (tenant.whatsapp ?? "").replace(/\D/g, "");

@@ -1,22 +1,26 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import type { Tenant, Project } from "@/lib/types";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const supabase = await createClient();
   const { data: t } = await supabase.from("tenants").select("*").eq("slug", params.slug).eq("is_active", true).single();
-  return { title: t ? `مشاريع ${t.name_ar}` : "المشاريع" };
+  const tenant = t as Tenant | null;
+  return { title: tenant ? `مشاريع ${tenant.name_ar}` : "المشاريع" };
 }
 
 export default async function ProjectsPage({ params }: { params: { slug: string } }) {
   const supabase = await createClient();
 
-  const { data: tenant } = await supabase
+  const { data: t } = await supabase
     .from("tenants").select("*").eq("slug", params.slug).eq("is_active", true).single();
+  const tenant = t as Tenant | null;
   if (!tenant) notFound();
 
-  const { data: projects } = await supabase
+  const { data: projData } = await supabase
     .from("projects").select("*").eq("tenant_id", tenant.id).is("deleted_at", null).order("display_order");
+  const projects = projData as Project[] | null;
 
   const wa = (tenant.whatsapp ?? "").replace(/\D/g, "");
 

@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import type { Tenant } from "@/lib/types";
 import ModernTemplate from "@/templates/modern";
 import ClassicTemplate from "@/templates/classic";
 import HeritageTemplate from "@/templates/heritage";
@@ -16,23 +17,25 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     .eq("slug", params.slug)
     .eq("is_active", true)
     .single();
-  if (!t) return {};
+  const tenantMeta = t as Tenant | null;
+  if (!tenantMeta) return {};
   return {
-    title: t.name_ar,
-    description: t.about_ar?.slice(0, 160) ?? undefined,
-    openGraph: { title: t.name_ar, images: t.logo_url ? [t.logo_url] : [] },
+    title: tenantMeta.name_ar,
+    description: tenantMeta.about_ar?.slice(0, 160) ?? undefined,
+    openGraph: { title: tenantMeta.name_ar, images: tenantMeta.logo_url ? [tenantMeta.logo_url] : [] },
   };
 }
 
 export default async function SitePage({ params }: { params: { slug: string } }) {
   const supabase = await createClient();
 
-  const { data: tenant } = await supabase
+  const { data: raw } = await supabase
     .from("tenants")
     .select("*")
     .eq("slug", params.slug)
     .eq("is_active", true)
     .single();
+  const tenant = raw as Tenant | null;
 
   if (!tenant) notFound();
 

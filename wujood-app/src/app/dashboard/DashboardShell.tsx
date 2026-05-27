@@ -9,6 +9,49 @@ import type { Tenant } from "@/lib/types";
 import { PLANS } from "@/lib/constants";
 import { daysUntil } from "@/lib/utils";
 
+// ── Icon components ────────────────────────────────────────────────────────
+
+function I({ size = 16, d }: { size?: number; d: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d={d} />
+    </svg>
+  );
+}
+
+function HomeIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />; }
+function BuildingIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M3 21h18M9 21V9m6 12V9M3 9l9-7 9 7M9 9h6" />; }
+function BriefcaseIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />; }
+function LayersIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />; }
+function BarIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M12 20V10M18 20V4M6 20v-6" />; }
+function StarIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />; }
+function FaqIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01M21 12A9 9 0 103 12a9 9 0 0018 0z" />; }
+function PaletteIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4 10 10c0 1.1-.9 2-2 2h-1.5c-.8 0-1.5.7-1.5 1.5 0 .4.2.8.4 1.1.3.4.5.8.5 1.4 0 1.1-.9 2-2 2H12z" />; }
+function GlobeIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M12 2a10 10 0 100 20A10 10 0 0012 2zM2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />; }
+function CardIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M21 4H3a2 2 0 00-2 2v12a2 2 0 002 2h18a2 2 0 002-2V6a2 2 0 00-2-2zM1 10h22" />; }
+function TrendIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M23 6l-9.5 9.5-5-5L1 18M17 6h6v6" />; }
+function LogoutIcon({ size = 16 }: { size?: number }) { return <I size={size} d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />; }
+function MenuIcon() { return <I size={18} d="M3 12h18M3 6h18M3 18h18" />; }
+function CloseIcon() { return <I size={18} d="M18 6L6 18M6 6l12 12" />; }
+function ExternalIcon() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+    </svg>
+  );
+}
+
+function WujoodMark() {
+  return (
+    <div style={{ width: 28, height: 28, background: "var(--primary)", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L20 7V17L12 22L4 17V7L12 2Z" fill="rgba(255,255,255,.9)" />
+        <path d="M12 7L16 9.5V14.5L12 17L8 14.5V9.5L12 7Z" fill="var(--primary)" />
+      </svg>
+    </div>
+  );
+}
+
 const NAV = [
   { href: "/dashboard",              label: "الرئيسية",            icon: HomeIcon },
   { href: "/dashboard/info",         label: "المعلومات الأساسية",  icon: BuildingIcon },
@@ -212,43 +255,3 @@ export default function DashboardShell({ tenant, children }: { tenant: Tenant; c
   );
 }
 
-// ── Icon components ────────────────────────────────────────────────────────
-
-function WujoodMark() {
-  return (
-    <div style={{ width: 28, height: 28, background: "var(--primary)", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2L20 7V17L12 22L4 17V7L12 2Z" fill="rgba(255,255,255,.9)" />
-        <path d="M12 7L16 9.5V14.5L12 17L8 14.5V9.5L12 7Z" fill="var(--primary)" />
-      </svg>
-    </div>
-  );
-}
-
-function I({ size = 16, d }: { size?: number; d: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d={d} />
-    </svg>
-  );
-}
-
-const HomeIcon = ({ size = 16 }) => <I size={size} d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />;
-const BuildingIcon = ({ size = 16 }) => <I size={size} d="M3 21h18M9 21V9m6 12V9M3 9l9-7 9 7M9 9h6" />;
-const BriefcaseIcon = ({ size = 16 }) => <I size={size} d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />;
-const LayersIcon = ({ size = 16 }) => <I size={size} d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />;
-const BarIcon = ({ size = 16 }) => <I size={size} d="M12 20V10M18 20V4M6 20v-6" />;
-const StarIcon = ({ size = 16 }) => <I size={size} d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />;
-const FaqIcon = ({ size = 16 }) => <I size={size} d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01M21 12A9 9 0 103 12a9 9 0 0018 0z" />;
-const PaletteIcon = ({ size = 16 }) => <I size={size} d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4 10 10c0 1.1-.9 2-2 2h-1.5c-.8 0-1.5.7-1.5 1.5 0 .4.2.8.4 1.1.3.4.5.8.5 1.4 0 1.1-.9 2-2 2H12z" />;
-const GlobeIcon = ({ size = 16 }) => <I size={size} d="M12 2a10 10 0 100 20A10 10 0 0012 2zM2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />;
-const CardIcon = ({ size = 16 }) => <I size={size} d="M21 4H3a2 2 0 00-2 2v12a2 2 0 002 2h18a2 2 0 002-2V6a2 2 0 00-2-2zM1 10h22" />;
-const TrendIcon = ({ size = 16 }) => <I size={size} d="M23 6l-9.5 9.5-5-5L1 18M17 6h6v6" />;
-const LogoutIcon = ({ size = 16 }) => <I size={size} d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />;
-const MenuIcon = () => <I size={18} d="M3 12h18M3 6h18M3 18h18" />;
-const CloseIcon = () => <I size={18} d="M18 6L6 18M6 6l12 12" />;
-const ExternalIcon = () => (
-  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-  </svg>
-);

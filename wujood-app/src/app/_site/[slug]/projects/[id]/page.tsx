@@ -1,22 +1,26 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import type { Tenant, Project } from "@/lib/types";
 
 export async function generateMetadata({ params }: { params: { slug: string; id: string } }): Promise<Metadata> {
   const supabase = await createClient();
   const { data: p } = await supabase.from("projects").select("*").eq("id", params.id).single();
-  return p ? { title: p.title_ar, description: p.description_ar ?? undefined, openGraph: { images: p.cover_url ? [p.cover_url] : [] } } : {};
+  const proj = p as Project | null;
+  return proj ? { title: proj.title_ar, description: proj.description_ar ?? undefined, openGraph: { images: proj.cover_url ? [proj.cover_url] : [] } } : {};
 }
 
 export default async function ProjectDetailPage({ params }: { params: { slug: string; id: string } }) {
   const supabase = await createClient();
 
-  const { data: tenant } = await supabase
+  const { data: t } = await supabase
     .from("tenants").select("*").eq("slug", params.slug).eq("is_active", true).single();
+  const tenant = t as Tenant | null;
   if (!tenant) notFound();
 
-  const { data: project } = await supabase
+  const { data: pj } = await supabase
     .from("projects").select("*, images:project_images(*)").eq("id", params.id).eq("tenant_id", tenant.id).is("deleted_at", null).single();
+  const project = pj as Project | null;
   if (!project) notFound();
 
   const wa = (tenant.whatsapp ?? "").replace(/\D/g, "");

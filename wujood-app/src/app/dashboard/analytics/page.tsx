@@ -9,13 +9,18 @@ export default async function AnalyticsPage() {
 
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
 
+  const rpcPromise = supabase.rpc("visitor_by_device", { p_tenant_id: tenant.id, p_since: thirtyDaysAgo }).then(
+    (result) => result,
+    () => ({ data: null, error: null }),
+  );
+
   const [
     { count: total30d },
     { data: byDevice },
     { data: topPaths },
   ] = await Promise.all([
     supabase.from("visitor_events").select("id", { count: "exact", head: true }).eq("tenant_id", tenant.id).gte("created_at", thirtyDaysAgo),
-    supabase.rpc("visitor_by_device", { p_tenant_id: tenant.id, p_since: thirtyDaysAgo }).catch(() => ({ data: null })),
+    rpcPromise,
     supabase.from("visitor_events").select("path").eq("tenant_id", tenant.id).gte("created_at", thirtyDaysAgo).limit(500),
   ]);
 

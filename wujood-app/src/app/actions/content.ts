@@ -93,12 +93,16 @@ export async function upsertStat(id: string | null, formData: FormData) {
     label: formData.get("label") as string,
   };
 
+  let error = null;
   if (id) {
-    await supabase.from("tenant_stats").update(data).eq("id", id).eq("tenant_id", tenant.id);
+    const { error: err } = await supabase.from("tenant_stats").update(data).eq("id", id).eq("tenant_id", tenant.id);
+    error = err;
   } else {
-    await supabase.from("tenant_stats").insert(data);
+    const { error: err } = await supabase.from("tenant_stats").insert(data);
+    error = err;
   }
 
+  if (error) return { success: false, error: error.message };
   revalidatePath("/dashboard/stats");
   return { success: true };
 }
@@ -106,7 +110,8 @@ export async function upsertStat(id: string | null, formData: FormData) {
 export async function deleteStat(id: string) {
   const { tenant } = await getTenantOrRedirect();
   const supabase = await createClient();
-  await supabase.from("tenant_stats").delete().eq("id", id).eq("tenant_id", tenant.id);
+  const { error } = await supabase.from("tenant_stats").delete().eq("id", id).eq("tenant_id", tenant.id);
+  if (error) return { success: false, error: error.message };
   revalidatePath("/dashboard/stats");
   return { success: true };
 }
@@ -126,12 +131,16 @@ export async function upsertTestimonial(id: string | null, formData: FormData) {
     is_published: formData.get("is_published") !== "false",
   };
 
+  let error = null;
   if (id) {
-    await supabase.from("tenant_testimonials").update(data).eq("id", id).eq("tenant_id", tenant.id);
+    const { error: err } = await supabase.from("tenant_testimonials").update(data).eq("id", id).eq("tenant_id", tenant.id);
+    error = err;
   } else {
-    await supabase.from("tenant_testimonials").insert(data);
+    const { error: err } = await supabase.from("tenant_testimonials").insert(data);
+    error = err;
   }
 
+  if (error) return { success: false, error: error.message };
   revalidatePath("/dashboard/testimonials");
   return { success: true };
 }
@@ -139,7 +148,8 @@ export async function upsertTestimonial(id: string | null, formData: FormData) {
 export async function deleteTestimonial(id: string) {
   const { tenant } = await getTenantOrRedirect();
   const supabase = await createClient();
-  await supabase.from("tenant_testimonials").delete().eq("id", id).eq("tenant_id", tenant.id);
+  const { error } = await supabase.from("tenant_testimonials").delete().eq("id", id).eq("tenant_id", tenant.id);
+  if (error) return { success: false, error: error.message };
   revalidatePath("/dashboard/testimonials");
   return { success: true };
 }
@@ -157,12 +167,16 @@ export async function upsertFaq(id: string | null, formData: FormData) {
     is_published: formData.get("is_published") !== "false",
   };
 
+  let error = null;
   if (id) {
-    await supabase.from("tenant_faqs").update(data).eq("id", id).eq("tenant_id", tenant.id);
+    const { error: err } = await supabase.from("tenant_faqs").update(data).eq("id", id).eq("tenant_id", tenant.id);
+    error = err;
   } else {
-    await supabase.from("tenant_faqs").insert(data);
+    const { error: err } = await supabase.from("tenant_faqs").insert(data);
+    error = err;
   }
 
+  if (error) return { success: false, error: error.message };
   revalidatePath("/dashboard/faqs");
   return { success: true };
 }
@@ -170,7 +184,8 @@ export async function upsertFaq(id: string | null, formData: FormData) {
 export async function deleteFaq(id: string) {
   const { tenant } = await getTenantOrRedirect();
   const supabase = await createClient();
-  await supabase.from("tenant_faqs").delete().eq("id", id).eq("tenant_id", tenant.id);
+  const { error } = await supabase.from("tenant_faqs").delete().eq("id", id).eq("tenant_id", tenant.id);
+  if (error) return { success: false, error: error.message };
   revalidatePath("/dashboard/faqs");
   return { success: true };
 }

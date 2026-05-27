@@ -8,7 +8,7 @@ export default function ClassicTemplate({ tenant: t, projects, services, stats, 
   const [filter, setFilter] = useState("all");
   const [openFaq, setOpenFaq] = useState<string | null>(faqs[0]?.id ?? null);
 
-  const cats = ["all", ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))];
+  const cats = ["all", ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean))) as string[]];
   const filtered = filter === "all" ? projects : projects.filter((p) => p.category === filter);
   const wa = (t.whatsapp ?? "").replace(/\D/g, "");
   const initial = t.name_ar?.[0] ?? "م";
@@ -144,7 +144,7 @@ export default function ClassicTemplate({ tenant: t, projects, services, stats, 
                 <div style={{ display: "flex", gap: 0, borderBottom: "1px solid #d8c89e" }}>
                   {cats.map((c) => (
                     <button key={c} onClick={() => setFilter(c)}
-                      style={{ padding: "10px 18px", fontSize: 15, fontFamily: "'Markazi Text',serif", color: filter === c ? "#3a2618" : "#8c6e44", borderBottom: filter === c ? "2px solid #a37c2c" : "2px solid transparent", marginBottom: -1, fontWeight: 500, cursor: "pointer", background: "none", border: "none", borderBottom: filter === c ? "2px solid #a37c2c" : "2px solid transparent" }}>
+                      style={{ padding: "10px 18px", fontSize: 15, fontFamily: "'Markazi Text',serif", color: filter === c ? "#3a2618" : "#8c6e44", marginBottom: -1, fontWeight: 500, cursor: "pointer", background: "none", border: "none", borderBottom: filter === c ? "2px solid #a37c2c" : "2px solid transparent" }}>
                       {c === "all" ? "الكل" : c}
                     </button>
                   ))}

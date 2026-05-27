@@ -25,7 +25,7 @@ export async function uploadFile(
   }
 
   // Validate format
-  if (!limits.formats.includes(file.type)) {
+  if (!(limits.formats as readonly string[]).includes(file.type)) {
     return { error: `صيغة الملف غير مدعومة. الصيغ المقبولة: ${limits.formats.map((f) => f.split("/")[1]).join(", ")}` };
   }
 

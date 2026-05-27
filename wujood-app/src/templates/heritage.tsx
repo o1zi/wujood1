@@ -11,7 +11,7 @@ export default function HeritageTemplate({ tenant: t, projects, services, stats,
   const [filter, setFilter] = useState("all");
   const [openFaq, setOpenFaq] = useState<string | null>(faqs[0]?.id ?? null);
 
-  const cats = ["all", ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))];
+  const cats = ["all", ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean))) as string[]];
   const filtered = filter === "all" ? projects : projects.filter((p) => p.category === filter);
   const wa = (t.whatsapp ?? "").replace(/\D/g, "");
   const initial = t.name_ar?.[0] ?? "م";
